@@ -233,7 +233,127 @@ The endpoint will call the `textual` emotion classifier and be able to detect em
 }
 ```
 
-###
+1. Classifying emotions on text using `cURL`
+
+To classify the emotion in the text using `cURL` we send the `POST` request as follows:
+
+```shell
+curl -X POST http://127.0.0.1:3001/api/classify/text -H "Content-Type: application/json" -d "{\"text\":\"i feel like my irritable sensitive combination skin has finally met it s match.\"}"
+```
+
+If everything went well we will be able to se the `json` response that looks as follow:
+
+```json
+{
+  "class_label": "anger",
+  "emoji": "\ud83d\ude20",
+  "label": 2,
+  "predictions": [
+    {
+      "class_label": "joy",
+      "emoji": "\ud83d\ude04",
+      "label": 0,
+      "probability": 0.0
+    },
+    {
+      "class_label": "sadness",
+      "emoji": "\ud83d\ude1e",
+      "label": 1,
+      "probability": 0.0
+    },
+    {
+      "class_label": "anger",
+      "emoji": "\ud83d\ude20",
+      "label": 2,
+      "probability": 1.0
+    },
+    {
+      "class_label": "fear",
+      "emoji": "\ud83d\ude28",
+      "label": 3,
+      "probability": 0.0
+    },
+    {
+      "class_label": "love",
+      "emoji": "\ud83d\ude0d",
+      "label": 4,
+      "probability": 0.0
+    },
+    {
+      "class_label": "surprise",
+      "emoji": "\ud83d\ude2e",
+      "label": 5,
+      "probability": 0.0
+    }
+  ],
+  "probability": 1.0,
+  "sentence": "i feel like my irritable sensitive combination skin has finally met it s match."
+}
+```
+
+2. Classifying emotions on text using `POSTMAN` client
+
+To classify the emotions on text using postman client we do it as follows:
+
+- Send a `POST` request at `http://127.0.0.1:3001/api/classify/text`
+- Under request body we select `json`
+- We add the `json` object that looks as follows:
+
+```json
+{
+  "text": "i feel like my irritable sensitive combination skin has finally met it s match."
+}
+```
+
+- Click send and you will be able to see the predictions of the following nature:
+
+```json
+{
+  "class_label": "anger",
+  "emoji": "\ud83d\ude20",
+  "label": 2,
+  "predictions": [
+    {
+      "class_label": "joy",
+      "emoji": "\ud83d\ude04",
+      "label": 0,
+      "probability": 0.0
+    },
+    {
+      "class_label": "sadness",
+      "emoji": "\ud83d\ude1e",
+      "label": 1,
+      "probability": 0.0
+    },
+    {
+      "class_label": "anger",
+      "emoji": "\ud83d\ude20",
+      "label": 2,
+      "probability": 1.0
+    },
+    {
+      "class_label": "fear",
+      "emoji": "\ud83d\ude28",
+      "label": 3,
+      "probability": 0.0
+    },
+    {
+      "class_label": "love",
+      "emoji": "\ud83d\ude0d",
+      "label": 4,
+      "probability": 0.0
+    },
+    {
+      "class_label": "surprise",
+      "emoji": "\ud83d\ude2e",
+      "label": 5,
+      "probability": 0.0
+    }
+  ],
+  "probability": 1.0,
+  "sentence": "i feel like my irritable sensitive combination skin has finally met it s match."
+}
+```
 
 ### Facial Emotions
 
