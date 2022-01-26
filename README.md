@@ -1,8 +1,18 @@
 ### Emotion AI
 
-This is a Deep Leaning API for classifying emotions from human face and human audios.
+This is a Deep Leaning API for classifying emotions from human face text and audios.
+
+```
+😞 😨 😄 😮 😍 😠 😐 🤮
+```
 
 <img src="/1.jpg" alt="alt" width="100%"/>
+
+This api will be able to serve different kind of models to perform emotions predictions based on the following user input.
+
+1. texts
+2. audios
+3. facial images
 
 ### Starting the server
 
@@ -39,9 +49,26 @@ class AppConfig:
 
 ### EmotionAI
 
-Consist of two parallel models that are trained with different model architectures to save different task. The one is for audio classification and the other is for facial emotion classfication. Each model is served on a different endpoint but on the same server.
+Consist of two parallel models that are trained with different model architectures to save different task. The AI api will do the following:
 
-### Audio Classification
+1. Given a text be able to predict the emotions in the text
+2. Given an audio be able to predict the emotions in the audio
+3. Given a facial image be able to predict the expression based on the human face.
+
+### Oral emotions
+
+The `8` oral emotions that we will be predicting are as follows:
+
+- neutral
+- calm
+- happy
+- sad
+- angry
+- fearful
+- disgust
+- surprised
+
+<img src="/2.png" alt="alt" width="100%"/>
 
 Sending an audio file to the server at `http://127.0.0.1:3001/api/classify/audio` using the `POST` method we will be able to get the data that looks as follows as the `json` response from the server:
 
@@ -56,7 +83,7 @@ Sending an audio file to the server at `http://127.0.0.1:3001/api/classify/audio
 }
 ```
 
-### Classifying audios
+### Classifying emotions in audios
 
 1. Using `cURL`
 
@@ -131,6 +158,100 @@ If everything went well you will be able to get expected response.
   "success": true
 }
 ```
+
+### Textual Emotions
+
+There are `6` different emotions that we can detect in a sentence or a text which are:
+
+- 😞 -> sadness
+- 😨 -> fear
+- 😄 -> joy
+- 😮 -> surprise
+- 😍 -> love
+- 😠 -> anger
+
+<img src="/4.png" alt="alt" width="100%"/>
+
+Given a sentence to the right endpoint `http://127.0.0.1:3001/api/classify/text` with expected request body which look as follows:
+
+```json
+{
+  "text": "some text here"
+}
+```
+
+The endpoint will call the `textual` emotion classifier and be able to detect emotions in the text and yield the response that looks like:
+
+```json
+{
+  "predictions": {
+    "class_label": "sadness",
+    "emoji": "😞",
+    "label": 1,
+    "predictions": [
+      {
+        "class_label": "joy",
+        "emoji": "😄",
+        "label": 0,
+        "probability": 0.0
+      },
+      {
+        "class_label": "sadness",
+        "emoji": "😞",
+        "label": 1,
+        "probability": 1.0
+      },
+      {
+        "class_label": "anger",
+        "emoji": "😠",
+        "label": 2,
+        "probability": 0.0
+      },
+      {
+        "class_label": "fear",
+        "emoji": "😨",
+        "label": 3,
+        "probability": 0.0
+      },
+      {
+        "class_label": "love",
+        "emoji": "😍",
+        "label": 4,
+        "probability": 0.0
+      },
+      {
+        "class_label": "surprise",
+        "emoji": "😮",
+        "label": 5,
+        "probability": 0.0
+      }
+    ],
+    "probability": 1.0,
+    "sentence": "im updating my blog because i feel shitty."
+  },
+  "success": true
+}
+```
+
+###
+
+### Facial Emotions
+
+Facial emotion is a Deep Neural Network model that detect facial emotions of a human. The facial emotions that our model will be able to predict are as follows:
+
+- neutral
+- calm
+- happy
+- sad
+- angry
+- fearful
+- disgust
+- surprised
+
+<img src="/3.jpg" alt="alt" width="100%"/>
+
+Given an image of a human face the model should be able to predict the human facial emotions.
+Sending an face image file to the server at `http://127.0.0.1:3001/api/classify/face` using the `POST` method we will be able to get the data that looks as follows as the `json` response from the server:
 
 ### Notebooks
 

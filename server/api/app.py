@@ -1,3 +1,11 @@
+
+
+"""
+note that you only need to download the tokenizer model once from spacy.
+"""
+# import spacy
+# spacy.cli.download("en_core_web_sm")
+
 from app import app
 from flask import make_response, jsonify
 

@@ -1,11 +1,33 @@
 from flask import Blueprint, make_response, jsonify, request
-from models import classify_audio, audio_classifier_model
+from models.oral import classify_audio, audio_classifier_model
+from models.textual import predict_text_emotion, text_emotions_model
 import io
 import soundfile as sf
 import torch
 import numpy as np
 
+class CustomException(Exception):
+    pass
+
 blueprint = Blueprint("blueprint", __name__)
+@blueprint.route('/classify/text', methods=["POST"])  
+def text_classifier():
+    data = {"success": False}
+    try:
+        if request.method == "POST":
+            res = request.get_json(force=True)
+            preds = predict_text_emotion(text_emotions_model, res.get("text"))
+            data["success"] = True
+            data["predictions"] = preds 
+            return make_response(jsonify(preds)), 200
+        else:
+            raise CustomException("the request method should be post only.")
+    except Exception as e:
+        print(e)
+        return make_response(jsonify({
+           "message": "internal server error.",
+            "code": 500
+        })), 500
 
 
 @blueprint.route('/classify/audio', methods=["POST"])    

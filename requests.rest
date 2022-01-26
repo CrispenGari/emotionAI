@@ -1,0 +1,6 @@
+POST http://127.0.0.1:3001/api/classify/text 
+Content-Type: application/json
+
+{
+    "text": "i feel like my irritable sensitive combination skin has finally met it s match."
+}
