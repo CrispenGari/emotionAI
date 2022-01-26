@@ -130,9 +130,9 @@ To make this request with postman we do it as follows:
 
 3. Using JavaScript `fetch` api.
 
-1. First you need to get the input from `html`
-1. Create a `formData` object
-1. make a POST requests
+- First you need to get the input from `html`
+- Create a `formData` object
+- make a POST requests
 
 ```js
 const input = document.getElementById("input").files[0];
@@ -354,6 +354,74 @@ To classify the emotions on text using postman client we do it as follows:
   "sentence": "i feel like my irritable sensitive combination skin has finally met it s match."
 }
 ```
+
+3. Using the `javascript` `fetch` API
+
+To classify emotions on text using the javascript fetch api, one can run the following script:
+
+```js
+fetch("http://127.0.0.1:3001/api/classify/text", {
+  method: "POST",
+  headers: new Headers({ "content-type": "application/json" }),
+  body: JSON.stringify({
+    text: "i feel like my irritable sensitive combination skin has finally met it s match.",
+  }),
+})
+  .then((res) => res.json())
+  .then((data) => console.log(data));
+```
+
+If everything goes well you will be able to get the following response from the server:
+
+```json
+{
+  "class_label": "anger",
+  "emoji": "\ud83d\ude20",
+  "label": 2,
+  "predictions": [
+    {
+      "class_label": "joy",
+      "emoji": "\ud83d\ude04",
+      "label": 0,
+      "probability": 0.0
+    },
+    {
+      "class_label": "sadness",
+      "emoji": "\ud83d\ude1e",
+      "label": 1,
+      "probability": 0.0
+    },
+    {
+      "class_label": "anger",
+      "emoji": "\ud83d\ude20",
+      "label": 2,
+      "probability": 1.0
+    },
+    {
+      "class_label": "fear",
+      "emoji": "\ud83d\ude28",
+      "label": 3,
+      "probability": 0.0
+    },
+    {
+      "class_label": "love",
+      "emoji": "\ud83d\ude0d",
+      "label": 4,
+      "probability": 0.0
+    },
+    {
+      "class_label": "surprise",
+      "emoji": "\ud83d\ude2e",
+      "label": 5,
+      "probability": 0.0
+    }
+  ],
+  "probability": 1.0,
+  "sentence": "i feel like my irritable sensitive combination skin has finally met it s match."
+}
+```
+
+> Note that when you are sending the request to the server using the `javascript` `fetch` API you don't need to worry about `CORS` this is a public API.
 
 ### Facial Emotions
 
