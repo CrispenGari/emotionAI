@@ -90,6 +90,7 @@ def predict_text_emotion(model, sentence:str, min_len = 5):
         if len(tokenized) < min_len:
             tokenized += ['<pad>'] * (min_len - len(tokenized))
         indexed = [VOCAB.get(t) for t in tokenized]
+        indexed = [i if i is not None else VOCAB.get('<unk>') for i in indexed]
         length =  [len(indexed)]
         tensor = torch.LongTensor(indexed).to(device)
         tensor = tensor.unsqueeze(1)
