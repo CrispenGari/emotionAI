@@ -1,6 +1,6 @@
 ### Emotion AI
 
-This is a Deep Leaning API for classifying emotions from human face text and audios.
+This is a Deep Leaning API for classifying emotions from text input and audios.
 
 ```
 😞 😨 😄 😮 😍 😠 😐 🤮
@@ -12,7 +12,6 @@ This api will be able to serve different kind of models to perform emotions pred
 
 1. texts
 2. audios
-3. facial images
 
 ### Starting the server
 
@@ -53,7 +52,6 @@ Consist of two parallel models that are trained with different model architectur
 
 1. Given a text be able to predict the emotions in the text
 2. Given an audio be able to predict the emotions in the audio
-3. Given a facial image be able to predict the expression based on the human face.
 
 ### Oral emotions
 
@@ -423,26 +421,9 @@ If everything goes well you will be able to get the following response from the 
 
 > Note that when you are sending the request to the server using the `javascript` `fetch` API you don't need to worry about `CORS` this is a public API.
 
-### Facial Emotions
-
-Facial emotion is a Deep Neural Network model that detect facial emotions of a human. The facial emotions that our model will be able to predict are as follows:
-
-- neutral
-- calm
-- happy
-- sad
-- angry
-- fearful
-- disgust
-- surprised
-
-<img src="/3.jpg" alt="alt" width="100%"/>
-
-Given an image of a human face the model should be able to predict the human facial emotions.
-Sending an face image file to the server at `http://127.0.0.1:3001/api/classify/face` using the `POST` method we will be able to get the data that looks as follows as the `json` response from the server:
-
 ### Notebooks
 
 If you want to see how the models were trained you can open the respective notebooks:
 
-1. [Audio Classification]()
+1. [Audio (Oral) Emotion Classification](https://github.com/CrispenGari/emotionAI/blob/main/notebooks/01_RAVDESS_EMOTIONS.ipynb)
+2. [Textual Emotion Classification](https://github.com/CrispenGari/emotionAI/blob/main/notebooks/01_Emotions_Sentiment_Analyisis.ipynb)

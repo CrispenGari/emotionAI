@@ -52,7 +52,7 @@ class EmotionsLSTMRNN(nn.Module):
 
 
 # Tokenizers
-print(" ✅ LOADING TOKENIZERS\n")
+print(" ✅ LOADING TOKENIZER FROM SPACY(en_core_web_sm)!\n")
 spacy_en = spacy.load('en_core_web_sm')
 print(" ✅ LOADING TOKENIZERS DONE!\n")
 
@@ -69,7 +69,7 @@ BIDIRECTIONAL = True
 DROPOUT = 0.5
 PAD_IDX = VOCAB.get(PAD_TOKEN) 
 
-print(" ✅ LOADING TEXT EMOTION MODELS\n")
+print(" ✅ LOADING TEXTUAL EMOTION MODELS!\n")
 text_emotions_model = EmotionsLSTMRNN(INPUT_DIM, 
             EMBEDDING_DIM, 
             HIDDEN_DIM, 
@@ -80,7 +80,7 @@ text_emotions_model = EmotionsLSTMRNN(INPUT_DIM,
             PAD_IDX).to(device)
 
 text_emotions_model.load_state_dict(torch.load(TEXT_MODEL_PATH, map_location=device))
-print(" ✅ LOADING TRANSLATION MODELS DONE!\n")
+print(" ✅ LOADING TEXTUAL EMOTION MODEL DONE!\n")
 
 
 def predict_text_emotion(model, sentence:str, min_len = 5):

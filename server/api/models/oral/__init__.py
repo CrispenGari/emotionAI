@@ -62,10 +62,10 @@ class AudioClassifier(nn.Module):
 # Model instances
 
 
-print(" ✅ LOADING AUDIO CLASSIFICATION MODEL")
+print(" ✅ LOADING AUDIO CLASSIFICATION MODEL!")
 audio_classifier_model = AudioClassifier().to(device)
 audio_classifier_model.load_state_dict(torch.load(AUDIO_MODEL_PATH, map_location=device))
-print("\n ✅ DONE LOADING AUDIO CLASSIFICATION MODEL")
+print("\n ✅ DONE LOADING AUDIO CLASSIFICATION MODEL!\n")
 
 
 
